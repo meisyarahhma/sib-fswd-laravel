@@ -30,12 +30,12 @@
                     <td>{{$p -> id}}</td>
                     <td>
                         <p class="lead">
-                            <a class="btn btn-primary" href="" role="button">View</a>
-                            <a class="btn btn-warning" href="" role="button">Update</a>
-                            <a class="btn btn-danger"href="" role="button">Delete</a>
+                            <a class="btn btn-primary" href="/user/detail/{{$p -> id}}" role="button">View</a>
+                            <a class="btn btn-warning" href="/user/update/{{$p -> id}}" role="button">Update</a>
+                            <a class="btn btn-danger"href="/user/delete/{{$p -> id}}" role="button">Delete</a>
                         </p>
                     </td>
-                    <td>{{$p -> foto}}</td>
+                    <td> <img src="image/{{$p -> foto}}" style=width:50px> </td>
                     <td>{{$p -> name}}</td>
                     <td>{{$p -> email}}</td>
                     <td>{{$p -> telp}}</td>

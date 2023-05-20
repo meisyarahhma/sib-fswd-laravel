@@ -24,7 +24,7 @@ class UserController extends Controller
         //pengecualian upload value tokel dan submit
         // Pendaftaran::create($request -> except(['_token','submit_btn','updated_at','created_at']));
         
-        $validator = Validator::make($request->all(),[
+        $validator =Pendaftaran::make($request->all(),[
             'name' => 'required',
             'role' => 'required',
             'password' => 'required',
@@ -65,5 +65,31 @@ class UserController extends Controller
         // ]);
 
         return redirect()->route('index');
+    }
+
+    public function update($id){
+        $data = Pendaftaran::find($id);
+        // dd($data);
+        return view('pendaftaran.update', compact('data'));
+    }
+
+    public function prosesupdate(Request $request, $id){
+        $data = Pendaftaran::find($id);
+        $data -> update($request->all());
+        // dd($data);
+        return redirect()->route('user')->with('success','Data berhasil di update');
+    }
+
+    public function detail($id){
+        $data = Pendaftaran::find($id);
+        // dd($data);
+        return view('pendaftaran.detail', compact('data'));
+    }
+
+    public function delete($id){
+        $data = Pendaftaran::find($id);
+        $data -> delete();
+        // dd($data);
+        return redirect()->route('user')->with('success','Data berhasil di hapus');
     }
 }
