@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductyController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SliderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,3 +60,7 @@ Route::get('/grup/create', [RoleController::class,'create'])->name('role.create'
 Route::post('/grup/store', [RoleController::class,'store'])->name('role.store');
 Route::get('/grup/delete/{id}', [RoleController::class,'delete'])->name('role.delete');
 
+
+Route::get('/slider', [SliderController::class,'index'])->name('slider.index');
+Route::get('/slider/create', [SliderController::class,'create'])->name('slider.create');
+Route::post('/slider/store', [SliderController::class,'store'])->name('slider.store');

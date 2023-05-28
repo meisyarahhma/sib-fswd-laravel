@@ -3,7 +3,7 @@
 @section('content')
     <body>
         <div class="col-lg-10 col-sm-12 my-3">
-            <h2>Tambah Produk</h2>
+            <h2>Edit Data Produk</h2>
             <form action="{{route('product.prosesupdate',$produk->id)}}" method="POST" enctype="multipart/form-data" >
                 @csrf
                 @method('PUT')

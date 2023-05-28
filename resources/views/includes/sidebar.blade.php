@@ -6,10 +6,15 @@
                         </a>
                         <ul class="nav nav-pills flex-column mt-4">
                             <div class="nav-item py-2 py-sm-0">
+                                <!-- <span class="text-white" >Core</span> -->
                                 <a href="/dashboard" class="nav-link text-white">
                                     <i class="fs-5 fa fa-dashboard"></i><span class="fs-4 ms-3 d-none d-sm-inline">Dashboard</span>
                                 </a>
-                        
+                            </div>
+                            <div class="nav-item py-2 py-sm-0">
+                                <a href="{{route('slider.index')}}" class="nav-link text-white">
+                                    <i class="fs-5 fa fa-images"></i><span class="fs-4 ms-3 d-none d-sm-inline">Slider</span>
+                                </a>
                             </div>
                             <div class="nav-item py-2 py-sm-0">
                                     <a class="nav-link text-white collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
