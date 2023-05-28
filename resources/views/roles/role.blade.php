@@ -3,28 +3,28 @@
 @section('content')
         <div class="col-lg-10 col-sm-12">
             <div class="justify-content-space-between">
-                <a class="btn btn-primary my-3" href="{{route('category.create')}}" role="button">Tambah Kategori</a>
+                <a class="btn btn-primary my-3" href="grup/create" role="button">Tambah Role</a>
             </div> 
             <div class="my-2">
-                <h2>Daftar Kategori</h2>
+                <h2>Grup Pengguna</h2>
             </div>
             
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Kategori</th>
+                        <th scope="col">Role</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-               @foreach($categories as $category) 
+               @foreach($roles as $r) 
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$category['name']}}</td>
+                    <td>{{$r['name']}}</td>
                     <td>
                         <p class="lead">
-                            <a class="btn btn-danger"href="/category/delete/{{$category->id}}" role="button">Delete</a>
+                            <a class="btn btn-danger"href="/grup/delete/{{$r->id}}" role="button">Delete</a>
                         </p>
                     </td>
                 </tr> 

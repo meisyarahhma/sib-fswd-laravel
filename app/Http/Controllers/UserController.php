@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pendaftaran;
+use App\Models\User;
+use App\Models\role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Validator;
@@ -10,53 +11,58 @@ use App\Http\Controllers\Validator;
 class UserController extends Controller
 {
     public function index(){
-        $pendaftaran = Pendaftaran::All();
-        return view('pendaftaran.index',compact(['pendaftaran']));
+        $user = User::with('roles')->get();
+        return view('users.index',compact('user'));
     }
 
     public function create(){
-        return view('pendaftaran.create');
+        $user = User::All();
+        $roles= role::All();
+        return view('users.create', compact('user','roles')) ;
     }
 
     public function store(Request $request){
         
-        $pendaftaran =Pendaftaran::create([
+        $user =User::create([
             'name' => $request -> name,
-            'role' => $request->role,
+            'role_id' => $request->role_id,
             'password' => $request->password,
             'email' => $request->email,
-            'telp' => $request->telp,
+            'phone' => $request->phone,
             'address' => $request->address,
-            'foto' => $request->foto,
+            // 'foto' => $request->foto,
         ]);
 
         return redirect()->route('index');
     }
 
     public function update($id){
-        $data = Pendaftaran::find($id);
+        $data = User::find($id);
+        $roles= role::All();
         // dd($data);
-        return view('pendaftaran.update', compact('data'));
+        return view('users.update', compact('data','roles'));
     }
 
     public function prosesupdate(Request $request, $id){
-        $data = Pendaftaran::find($id);
-        $data -> update($request->all());
+        $data = User::find($id);
+        $data -> update([
+            'name' => $request -> name,
+            'role_id' => $request->role_id,
+            'password' => $request->password,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            // 'foto' => $request->foto,
+        ]);
         // dd($data);
-        return redirect()->route('user')->with('success','Data berhasil di update');
-    }
-
-    public function detail($id){
-        $data = Pendaftaran::find($id);
-        // dd($data);
-        return view('pendaftaran.detail', compact('data'));
+        return redirect()->route('index');
     }
 
     public function delete($id){
-        $data = Pendaftaran::find($id);
+        $data = User::find($id);
         $data -> delete();
         // dd($data);
-        return redirect()->route('user')->with('success','Data berhasil di hapus');
+        return redirect()->route('index');
     }
 
     public function totalUser()
@@ -64,6 +70,6 @@ class UserController extends Controller
         // $user = DB::table('pendaftaran')->get();
 
         // return view('pendaftaran.role',['role' => $user] );
-        return view('pendaftaran.role' );
+        return view('users.role' );
     }
 }

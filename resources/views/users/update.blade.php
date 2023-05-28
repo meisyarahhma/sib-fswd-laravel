@@ -1,31 +1,32 @@
 
     <head>
-        <title>FORM PENGGUNA</title>
+        <title>EDIT DATA PENGGUNA</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
 
     <body>
         <div class="container my-2">
-            <h2>Tambah Pengguna</h2>
-            <form action="/user/store" method="POST" enctype="multipart/form-data" >
+            <h2>Edit Data Pengguna</h2>
+            <form action="{{route('prosesupdate',$data->id)}}" method="POST" enctype="multipart/form-data" >
                 @csrf
+                @method('PUT')
                 Nama</br>
-                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Pengguna">
+                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Pengguna" value="{{$data->name}}">
                 
                 <div class="row">
                     <div class="form-group col-md-6"> <br>
-                        <label for="role">Role</label>
-                        <select class="form-control" id="role" name="role" >
-                            <option value="">-Pilih Role Pengguna-</option>
-                            <option value="admin" name="admin">Admin</option>
-                            <option value="user" name="user">User</option>
+                        <label for="role_id">Role</label>
+                        <select class="form-control" id="role_id" name="role_id" >
+                            @foreach($roles as $r) 
+                            <option value="{{$r->id}}" {{ $data->role_id == $r->id ? 'selected' : '' }}>{{$r->name}}</option>
+                            @endforeach
                         </select> 
                     </div> 
                     <div class="form-group col-md-6"> <br>
-                        <label for="userpassword">Password</label>
+                        <label for="userpassword" >Password</label>
                         <div class="input-group">
                             
-                            <input type="password" class="form-control" id="password" name="password"  placeholder="Masukkan password">
+                            <input type="password" class="form-control" id="password" name="password"  placeholder="Masukkan password" value="{{$data->password}}">
                             <div class="input-group-append">
                                 <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
                                 <span id="mybutton" onclick="change()" class="input-group-text">
@@ -45,25 +46,25 @@
                 <div class="row">
                     <div class="form-group col-md-6"> <br>
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com" value="{{$data->email}}">
                     </div> 
                     <div class="form-group col-md-6"><br>
-                        <label for="telp">Telp</label>
-                        <input type="text" class="form-control" id="telp" name="telp" placeholder="Masukkan nomor telepon anda">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Masukkan nomor telepon anda" value="{{$data->phone}}">
                     </div>
                 </div> <br>
 
                 <div class="mb-3">
                     <label for="address" class="form-label">Alamat Lengkap</label>
-                    <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+                    <textarea class="form-control" id="address" name="address" rows="3">{{$data->address}}</textarea>
                 </div>
                 
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="foto">Unggah Foto</label> 
-                    <input class="form-control" id="foto" name="foto" type="file" >
+                    <input class="form-control" id="foto" name="foto" type="file" value="{{$data->foto}}">
                 </div>
-                </br>
-                <button type="submit" name="submit_btn"  class="btn btn-primary" >Upload</button>
+                </br> -->
+                <button type="submit" name="submit_btn"  class="btn btn-primary my-3" >Update</button>
             </form>
         </div>
         
