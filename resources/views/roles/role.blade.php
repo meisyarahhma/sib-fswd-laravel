@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('content')
-        <div class="col-lg-10 col-sm-12">
+        <div class="container-fluid px-4">
             <div class="justify-content-space-between">
                 <a class="btn btn-primary my-3" href="grup/create" role="button">Tambah Role</a>
             </div> 
@@ -24,7 +24,7 @@
                     <td>{{$r['name']}}</td>
                     <td>
                         <p class="lead">
-                            <a class="btn btn-danger"href="/grup/delete/{{$r->id}}" role="button">Delete</a>
+                            <a class="btn btn-danger"href="/grup/delete/{{$r->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button">Delete</a>
                         </p>
                     </td>
                 </tr> 

@@ -5,7 +5,7 @@
     </head>
 
     <body>
-        <div class="container my-2">
+        <div class="container-fluid px-4">
             <h2>Edit Data Pengguna</h2>
             <form action="{{route('prosesupdate',$data->id)}}" method="POST" enctype="multipart/form-data" >
                 @csrf

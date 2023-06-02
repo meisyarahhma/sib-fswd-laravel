@@ -5,7 +5,7 @@
     </head>
 
     <body>
-        <div class="container my-2">
+        <div class="container-fluid px-4">
             <a class="btn btn-warning"href="/user" role="button">Kembali</a>
             </br>
             </br>

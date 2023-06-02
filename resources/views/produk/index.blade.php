@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('content')
-        <div class="col-lg-10 col-sm-12">
+        <div class="container-fluid px-4">
             <div class="justify-content-space-between">
                 <a class="btn btn-primary my-3" href="{{route('product.create')}}" role="button">Tambah Produk</a>
             </div> 
@@ -25,14 +25,14 @@
                 @foreach($produk as $p) 
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td> <img src="image/{{$p['gambar']}}" style=width:50px> </td>
+                    <td><img src="{{ asset('storage/produk/' . $p->gambar) }}" class="img-fluid" style="max-width: 100px;"alt="{{ $p->gambar }}"></td>
                     <td>{{$p['name']}}</td>
                     <td>Rp{{$p['price']}}</td>
                     <td>{{$p->category_id}}</td>
                     <td>
                         <p class="lead">
                             <a class="btn btn-warning" href="/product/update/{{$p->id}}" role="button">Update</a>
-                            <a class="btn btn-danger"href="/product/delete/{{$p->id}}" role="button">Delete</a>
+                            <a class="btn btn-danger"href="/product/delete/{{$p->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button">Delete</a>
                         </p>
                     </td>
                 </tr> 

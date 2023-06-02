@@ -7,6 +7,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductyController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisController;
+use App\Http\Controllers\SlidersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +25,22 @@ use App\Http\Controllers\SliderController;
 //     return view('welcome');
 // });
 
+// Route::get('/', function () {
+//     return view('layout.main');
+// });
+
+
+Route::get('/', [DashboardController::class,'landing'])->name('landing');
+
+
+//login
+Route::get('/login', [LoginController::class,'login'])->name('login');
+
+
+//Registrasi
+Route::get('/registrasi', [RegisController::class,'regis'])->name('regis');
+
+
 Route::get('/user', [UserController::class,'index'])->name('index');
 Route::get('/user/create', [UserController::class,'create']);
 Route::post('/user/store', [UserController::class,'store']); //proses upload
@@ -29,15 +48,8 @@ Route::get('/user/update/{id}', [UserController::class,'update'])->name('update'
 Route::put('/user/prosesupdate/{id}', [UserController::class,'prosesupdate'])->name('prosesupdate');
 // Route::get('/user/detail/{id}', [UserController::class,'detail'])->name('detail');
 Route::get('/user/delete/{id}', [UserController::class,'delete'])->name('delete');
-// Route::get('app-image/{image}', function($image = null)
-// {
-//     $file = Storage::get('imgproduct/' . $image);
-//     $mimetype = Storage::mimeType('imgproduct/' . $image);
-//     return response($file, 200)->header('Content-Type', $mimetype);
-// });
 
 
-Route::get('/', [DashboardController::class,'landing'])->name('landing');
 Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
 
 
@@ -61,6 +73,9 @@ Route::post('/grup/store', [RoleController::class,'store'])->name('role.store');
 Route::get('/grup/delete/{id}', [RoleController::class,'delete'])->name('role.delete');
 
 
-Route::get('/slider', [SliderController::class,'index'])->name('slider.index');
-Route::get('/slider/create', [SliderController::class,'create'])->name('slider.create');
-Route::post('/slider/store', [SliderController::class,'store'])->name('slider.store');
+Route::get('/sliders', [SlidersController::class,'index'])->name('sliders');
+Route::get('/sliders/create', [SlidersController::class,'create'])->name('sliders.create');
+Route::post('/sliders/store', [SlidersController::class,'store'])->name('sliders.store');
+Route::get('/sliders/update/{id}', [SlidersController::class,'update'])->name('sliders.update');
+Route::put('/sliders/prosesupdate/{id}', [SlidersController::class,'prosesupdate'])->name('sliders.prosesupdate');
+Route::get('/sliders/delete/{id}', [SlidersController::class,'delete'])->name('sliders.delete');

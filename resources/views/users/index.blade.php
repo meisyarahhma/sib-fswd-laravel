@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('content')
-            <div class="col-lg-10 col-sm-12">
+            <div class="container-fluid px-4">
                 <div class=" justify-content-space-between">
                     <a class="btn btn-primary my-3" href="user/create" role="button">Add User</a>
                     <!-- <a class=" btn btn-danger " href="" role="button">Logout</a> -->
@@ -27,11 +27,15 @@
                         <td>{{$u->email}}</td>
                         <td>{{$u->phone}}</td>
                         <td>{{$u->address}}</td>
-                        <td>{{$u->role_id}}</td>
+                        <td>
+                            <span class="badge {{ $u->roles ? ($u->roles->name == 'Admin' ? 'bg-success' : 'bg-primary') : 'bg-primary' }}">
+                                {{ $u->roles ? $u->roles->name : 'Tidak Tersedia' }}
+                            </span>                           
+                        </td>
                         <td>
                             <p class="lead">
                                 <a class="btn btn-warning" href="/user/update/{{$u->id}}" role="button">Update</a>
-                                <a class="btn btn-danger"href="/user/delete/{{$u->id}}" role="button">Delete</a>
+                                <a class="btn btn-danger"href="/user/delete/{{$u->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button">Delete</a>
                             </p>
                         </td>
                     </tr>  

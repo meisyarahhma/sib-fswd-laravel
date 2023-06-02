@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class ProductyController extends Controller
 {
@@ -21,23 +22,19 @@ class ProductyController extends Controller
     }
 
     public function store(Request $request){
-        //mengambil data gambar yang diupload
-        $gambar           = $request->file('gambar');
+        // ubah nama file gambar dengan angka random
+        $imageName = time().'.'.$request->gambar->extension(); // 1685433155.jpg
 
-        //mengambil nama gambar
-        $nama_gambar      = $gambar->getClientOriginalName();
+        // upload file gambar ke folder slider
+        Storage::putFileAs('public/produk', $request->file('gambar'), $imageName);
 
-        //memindahkan gambar ke folder tujuan
-        $gambar->move('image',$gambar->getClientOriginalName());
-
-        $upload = new Produk;
-        $upload->name = $request->input('name');
-        $upload->category_id = $request->input('category_id');
-        $upload->price = $request->input('price');
-        $upload->gambar       = $nama_gambar;      
-
-        //menyimpan data ke database
-        $upload->save();
+        // insert data ke table sliders
+        $produk = Produk::create([
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'gambar' => $imageName,
+        ]);
 
         return redirect()->route('product.index');
     }
@@ -50,19 +47,45 @@ class ProductyController extends Controller
     }
 
     public function prosesupdate(Request $request, $id){
-        $produk= Produk::find($id);
-        $produk -> update([
-            'name' => $request -> name,
-            'category_id' => $request ->category_id,
-            'price'=> $request ->price,
-            'gambar' => $request->gambar
-        ]);
+        // cek jika user mengupload gambar di form
+        if ($request->hasFile('gambar')) {
+            // ambil nama file gambar lama dari database
+            $old_image = Produk::find($id)->gambar;
+
+            // hapus file gambar lama dari folder slider
+            Storage::delete('public/produk/'.$old_image);
+
+            // FILE BARU //
+            // ubah nama file gambar baru dengan angka random
+            $imageName = time().'.'.$request->gambar->extension();
+
+            // upload file gambar ke folder slider
+            Storage::putFileAs('public/produk', $request->file('gambar'), $imageName);
+
+            // update data sliders
+            Slider::where('id', $id)->update([
+                'name' => $request->name,
+                'category_id' => $request ->category_id,
+                'price'=> $request ->price,
+                'gambar' => $imageName
+            ]);
+
+        } else {
+            // jika user tidak mengupload gambar
+            // update data sliders hnaya untuk title dan caption
+            Slider::where('id', $id)->update([
+                'name' => $request->name,
+                'category_id' => $request ->category_id,
+                'price'=> $request ->price
+            ]);
+        }
         // dd($data);
         return redirect()->route('product.index');
     }
 
     public function delete($id){
         $produk= Produk::find($id);
+        Storage::delete('public/produk/'.$produk->gambar);
         $produk -> delete();
         // dd($data);
         return redirect()->route('product.index');

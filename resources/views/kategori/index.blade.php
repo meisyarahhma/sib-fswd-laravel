@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('content')
-        <div class="col-lg-10 col-sm-12">
+        <div class="container-fluid px-4">
             <div class="justify-content-space-between">
                 <a class="btn btn-primary my-3" href="{{route('category.create')}}" role="button">Tambah Kategori</a>
             </div> 
@@ -24,7 +24,7 @@
                     <td>{{$category['name']}}</td>
                     <td>
                         <p class="lead">
-                            <a class="btn btn-danger"href="/category/delete/{{$category->id}}" role="button">Delete</a>
+                            <a class="btn btn-danger"href="/category/delete/{{$category->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button">Delete</a>
                         </p>
                     </td>
                 </tr> 

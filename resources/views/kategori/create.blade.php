@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('content')
-        <div class="col-lg-10 col-sm-12">
+        <div class="container-fluid px-4">
             <div class="my-3">
                 <h2>Tambah Kategori</h2>
             </div>

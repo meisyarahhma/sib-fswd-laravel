@@ -2,12 +2,13 @@
 
 @section('content')
     <body>
-        <div class="col-lg-10 col-sm-12 my-3">
-            <h2>Tambah Slider</h2>
-            <form action="{{route('slider.store')}}" method="POST" enctype="multipart/form-data" >
+        <div class="container-fluid px-4">
+            <h2>Edit Slider</h2>
+            <form action="{{route('sliders.prosesupdate',$sliders->id)}}" method="POST" enctype="multipart/form-data" >
                 @csrf
+                @method('PUT')
                 Nama</br>
-                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Pengguna">
+                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Pengguna" value="{{$sliders->name}}">
                 <div class="my-3">
                     <label for="gambar">Unggah Gambar Slider</label> 
                     <input class="form-control" id="gambar" name="gambar" type="file" >

@@ -51,30 +51,27 @@
         </nav>
         <!-- Carousel -->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-            <img class="d-block w-100" src="./image/profil.png" width="1000" height="500" alt="First slide">
+            <div class="carousel-indicators">
+                @foreach ($sliders as $slider)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $loop->iteration - 1 }}" class="{{ $loop->first ? 'active' : '' }}"
+                        aria-current="{{ $loop->first ? 'true' : '' }}" aria-label="Slide 1"></button>
+                @endforeach
             </div>
-            <div class="carousel-item">
-            <img class="d-block w-100" src="./image/landing.png" width="1000" height="500" alt="Second slide">
+            <div class="carousel-inner">
+                @foreach($sliders as $slider)
+                <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="3000">
+                        <img src="{{ asset('storage/slider/' . $slider->gambar) }}" class="d-block w-100" alt="{{ $slider->gambar }}">
+                    </div>
+                @endforeach
             </div>
-            <div class="carousel-item">
-            <img class="d-block w-100" src="..." alt="Third slide">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
         <!-- Section-->
         <section class="py-5">
@@ -84,7 +81,7 @@
                         @foreach($landing as $produk) 
                         <div class="col mb-5 card" width="200" height="600">
                             <!-- Product image-->
-                            <img class="card-img-top my-3" src="./image/{{$produk['gambar']}}" width="200" height="200"alt="..." />
+                            <img class="card-img-top my-3" src="{{ asset('storage/produk/' . $produk->gambar) }}" width="200" height="200"alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
