@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Storage;
 class ProductyController extends Controller
 {
     public function index(){
-        $produk= Produk::All();
+        $produk= Produk::with('category')->get();
         // dd($categories);
         return view('produk.index',compact(['produk']));
+    }
+
+    public function produk(){
+        $produk= Produk::All();
+        return view('produk.produk',compact(['produk']));
     }
 
     public function create(){

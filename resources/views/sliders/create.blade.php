@@ -2,12 +2,12 @@
 
 @section('content')
     <body>
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-4 my-3">
             <h2>Tambah Slider</h2>
             <form action="/sliders/store" method="POST" enctype="multipart/form-data" >
                 @csrf
                 Nama</br>
-                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Pengguna">
+                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Slider">
                 <div class="my-3">
                     <label for="gambar">Unggah Gambar Slider</label> 
                     <input class="form-control" id="gambar" name="gambar" type="file" >

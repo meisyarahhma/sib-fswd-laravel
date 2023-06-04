@@ -28,7 +28,11 @@
                     <td><img src="{{ asset('storage/produk/' . $p->gambar) }}" class="img-fluid" style="max-width: 100px;"alt="{{ $p->gambar }}"></td>
                     <td>{{$p['name']}}</td>
                     <td>Rp{{$p['price']}}</td>
-                    <td>{{$p->category_id}}</td>
+                    <td>
+                        <span class="badge {{ $p->category ? ($p->category->name == 'Admin' ? 'bg-success' : 'bg-primary') : 'bg-primary' }}">
+                            {{ $p->category ? $p->category->name : 'Tidak Tersedia' }}
+                        </span>
+                    </td>
                     <td>
                         <p class="lead">
                             <a class="btn btn-warning" href="/product/update/{{$p->id}}" role="button">Update</a>

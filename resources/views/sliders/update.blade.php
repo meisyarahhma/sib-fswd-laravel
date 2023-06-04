@@ -2,7 +2,7 @@
 
 @section('content')
     <body>
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-4 my-3">
             <h2>Edit Slider</h2>
             <form action="{{route('sliders.prosesupdate',$sliders->id)}}" method="POST" enctype="multipart/form-data" >
                 @csrf

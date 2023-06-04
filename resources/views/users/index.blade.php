@@ -6,7 +6,7 @@
                     <a class="btn btn-primary my-3" href="user/create" role="button">Add User</a>
                     <!-- <a class=" btn btn-danger " href="" role="button">Logout</a> -->
                 </div>  
-                <h2>Daftar Pengguna</h2>
+                <h2>Daftar User</h2>
                 <table class="table">
                     <thead>
                         <tr>
@@ -28,9 +28,9 @@
                         <td>{{$u->phone}}</td>
                         <td>{{$u->address}}</td>
                         <td>
-                            <span class="badge {{ $u->roles ? ($u->roles->name == 'Admin' ? 'bg-success' : 'bg-primary') : 'bg-primary' }}">
-                                {{ $u->roles ? $u->roles->name : 'Tidak Tersedia' }}
-                            </span>                           
+                            <span class="badge {{ $u->role ? ($u->role->name == 'Admin' ? 'bg-success' : 'bg-primary') : 'bg-primary' }}">
+                                {{ $u->role ? $u->role->name : 'Tidak Tersedia' }}
+                            </span>                        
                         </td>
                         <td>
                             <p class="lead">

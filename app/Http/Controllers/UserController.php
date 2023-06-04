@@ -7,11 +7,12 @@ use App\Models\role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index(){
-        $user = User::with('roles')->get();
+        $user = User::with('role')->get();
         return view('users.index',compact('user'));
     }
 
@@ -26,7 +27,7 @@ class UserController extends Controller
         $user =User::create([
             'name' => $request -> name,
             'role_id' => $request->role_id,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,

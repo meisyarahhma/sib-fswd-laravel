@@ -6,7 +6,7 @@
                 <a class="btn btn-primary my-3" href="grup/create" role="button">Tambah Role</a>
             </div> 
             <div class="my-2">
-                <h2>Grup Pengguna</h2>
+                <h2>Daftar Role</h2>
             </div>
             
             <table class="table">
