@@ -16,9 +16,18 @@ class Role
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        if($request->user()->role->name!=$role){
-            return abort(403);
+        $explode = explode('|', $role);
+
+        foreach ($explode as $key => $value) {
+            if ($request->user()->role->name == $value) {
+                return $next($request);
+            }
         }
-        return $next($request);
+
+        return abort(403);
+        // if($request->user()->role->name!=$role){
+        //     return abort(403);
+        // }
+        // return $next($request);
     }
 }
