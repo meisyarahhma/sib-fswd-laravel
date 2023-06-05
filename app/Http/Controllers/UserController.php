@@ -6,8 +6,8 @@ use App\Models\User;
 use App\Models\role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -23,7 +23,19 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3',
+            'role_id' => 'required',
+            'password' => 'required|min:6',
+            'email' => 'required|string',
+            'phone' => 'required|integer',
+            'address' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
         $user =User::create([
             'name' => $request -> name,
             'role_id' => $request->role_id,
@@ -45,6 +57,19 @@ class UserController extends Controller
     }
 
     public function prosesupdate(Request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3',
+            'role_id' => 'required',
+            'password' => 'required|min:6',
+            'email' => 'required|string',
+            'phone' => 'required|integer',
+            'address' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
         $data = User::find($id);
         $data -> update([
             'name' => $request -> name,

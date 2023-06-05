@@ -7,23 +7,28 @@
             <form action="/user/store" method="POST" enctype="multipart/form-data" >
                 @csrf
                 Nama</br>
-                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Pengguna">
-                
+                <input class="form-control @error('name') is-invalid @enderror" type="text" id="name" value="{{ old('name') }}" name="name" placeholder="Nama Pengguna">
+                    @error('name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 <div class="row">
                     <div class="form-group col-md-6"> <br>
-                        <label for="role">Role</label>
-                        <select class="form-control" id="role_id" name="role_id" >
+                        <label for="role_id">Role</label>
+                        <select class="form-control @error('role_id') is-invalid @enderror" id="role_id" name="role_id" >
                             <option value="">-Pilih Role Pengguna-</option>
                             @foreach($roles as $r) 
-                            <option value="{{$r->id}}">{{$r->name}}</option>
+                            <option value="{{$r->id}}" {{ old('role_id') == $r->id ? 'selected' : '' }}>{{$r->name}}</option>
                             @endforeach
                         </select> 
+                        @error('role_id')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div> 
                     <div class="form-group col-md-6"> <br>
                         <label for="userpassword">Password</label>
                         <div class="input-group">
                             
-                            <input type="password" class="form-control" id="password" name="password"  placeholder="Masukkan password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" value="{{ old('password') }}" name="password"  placeholder="Masukkan password">
                             <div class="input-group-append">
                                 <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
                                 <span id="mybutton" onclick="change()" class="input-group-text">
@@ -36,6 +41,9 @@
                                     </svg>
                                 </span>
                             </div>
+                            @error('password')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -43,17 +51,26 @@
                 <div class="row">
                     <div class="form-group col-md-6"> <br>
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}" name="email" placeholder="name@example.com">
+                        @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div> 
                     <div class="form-group col-md-6"><br>
                         <label for="phone">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Masukkan nomor telepon anda">
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" value="{{ old('phone') }}" name="phone" placeholder="Masukkan nomor telepon anda">
+                        @error('phone')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div> <br>
 
                 <div class="mb-3">
                     <label for="address" class="form-label">Alamat Lengkap</label>
-                    <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+                    <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="3">{{ old('name') }}</textarea>
+                    @error('address')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
                 
                 <!-- <div class="mb-3">

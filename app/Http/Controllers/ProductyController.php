@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProductyController extends Controller
 {
@@ -27,6 +28,17 @@ class ProductyController extends Controller
     }
 
     public function store(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3',
+            'category_id' => 'required',
+            'price' => 'required|integer',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
         // ubah nama file gambar dengan angka random
         $imageName = time().'.'.$request->gambar->extension(); // 1685433155.jpg
 
@@ -52,6 +64,17 @@ class ProductyController extends Controller
     }
 
     public function prosesupdate(Request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3',
+            'category_id' => 'required',
+            'price' => 'required|integer',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
         // cek jika user mengupload gambar di form
         if ($request->hasFile('gambar')) {
             // ambil nama file gambar lama dari database
@@ -68,7 +91,7 @@ class ProductyController extends Controller
             Storage::putFileAs('public/produk', $request->file('gambar'), $imageName);
 
             // update data sliders
-            Slider::where('id', $id)->update([
+            Produk::where('id', $id)->update([
                 'name' => $request->name,
                 'category_id' => $request ->category_id,
                 'price'=> $request ->price,
@@ -78,7 +101,7 @@ class ProductyController extends Controller
         } else {
             // jika user tidak mengupload gambar
             // update data sliders hnaya untuk title dan caption
-            Slider::where('id', $id)->update([
+            Produk::where('id', $id)->update([
                 'name' => $request->name,
                 'category_id' => $request ->category_id,
                 'price'=> $request ->price

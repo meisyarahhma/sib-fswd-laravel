@@ -52,15 +52,18 @@ Route::middleware('auth')->group(function(){
     //produk
     Route::get('/produk', [ProductyController::class,'produk'])->name('produk');
   
-    //Admin & Staff
-    Route::middleware('role:Admin|Staff')->group(function(){
+    //Admin
+    Route::middleware('role:Admin')->group(function(){
         Route::get('/sliders', [SlidersController::class,'index'])->name('sliders');
         Route::get('/sliders/create', [SlidersController::class,'create'])->name('sliders.create');
         Route::post('/sliders/store', [SlidersController::class,'store'])->name('sliders.store');
         Route::get('/sliders/update/{id}', [SlidersController::class,'update'])->name('sliders.update');
         Route::put('/sliders/prosesupdate/{id}', [SlidersController::class,'prosesupdate'])->name('sliders.prosesupdate');
         Route::get('/sliders/delete/{id}', [SlidersController::class,'delete'])->name('sliders.delete');
-        
+    });
+    
+    //Admin & Staff
+    Route::middleware('role:Admin|Staff')->group(function(){
         Route::get('/category', [CategoryController::class,'index'])->name('category.index');
         Route::get('/category/create', [CategoryController::class,'create'])->name('category.create');
         Route::post('/category/store', [CategoryController::class,'store'])->name('category.store');
@@ -76,10 +79,10 @@ Route::middleware('auth')->group(function(){
 
     //Admin
     Route::middleware('role:Admin')->group(function(){
-        Route::get('/grup', [RoleController::class,'index'])->name('role');
-        Route::get('/grup/create', [RoleController::class,'create'])->name('role.create');
-        Route::post('/grup/store', [RoleController::class,'store'])->name('role.store');
-        Route::get('/grup/delete/{id}', [RoleController::class,'delete'])->name('role.delete');
+        Route::get('/role', [RoleController::class,'index'])->name('role');
+        Route::get('/role/create', [RoleController::class,'create'])->name('role.create');
+        Route::post('/role/store', [RoleController::class,'store'])->name('role.store');
+        Route::get('/role/delete/{id}', [RoleController::class,'delete'])->name('role.delete');
     
         Route::get('/user', [UserController::class,'index'])->name('index');
         Route::get('/user/create', [UserController::class,'create']);

@@ -18,28 +18,43 @@
             <form action="{{ route('regis.store') }}" method="POST">
               @csrf
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInputUsername" placeholder="name" name="name" required autofocus>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="floatingInputUsername" placeholder="name" value="{{ old('name') }}" name="name" required autofocus>
                 <label for="floatingInputUsername">Name</label>
+                @error('name')
+                  <small class="text-danger">{{ $message }}</small>
+                @enderror
               </div>
 
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com" name="email">
+                <input type="email" class="form-control @error('email') is-invalid @enderror" id="floatingInputEmail" placeholder="name@example.com" value="{{ old('email') }}" name="email">
                 <label for="floatingInputEmail">Email address</label>
+                @error('email')
+                  <small class="text-danger">{{ $message }}</small>
+                @enderror
               </div>
 
               <div class="form-floating mb-3">
-                <input type="phone" class="form-control" id="floatingInputPhone" placeholder="08xxxxx" name="phone">
+                <input type="phone" class="form-control @error('phone') is-invalid @enderror" id="floatingInputPhone" placeholder="08xxxxx" value="{{ old('phone') }}" name="phone">
                 <label for="floatingInputPhone">Phone</label>
+                @error('phone')
+                  <small class="text-danger">{{ $message }}</small>
+                @enderror
               </div>
 
               <div class="form-floating mb-3">
-                <input type="address" class="form-control" id="floatingInputAddress" placeholder="address" name="address">
+                <input type="address" class="form-control @error('address') is-invalid @enderror" id="floatingInputAddress" placeholder="address" value="{{ old('address') }}" name="address">
                 <label for="floatingInputAddress">Address</label>
+                @error('address')
+                  <small class="text-danger">{{ $message }}</small>
+                @enderror
               </div>
 
               <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                <input type="password" class="form-control @error('password') is-invalid @enderror" id="floatingPassword" placeholder="Password" value="{{ old('password') }}" name="password">
                 <label for="floatingPassword">Password</label>
+                @error('password')
+                  <small class="text-danger">{{ $message }}</small>
+                @enderror
               </div>
 <!-- 
               <div class="form-floating mb-3">

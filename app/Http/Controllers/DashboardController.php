@@ -23,8 +23,5 @@ class DashboardController extends Controller
         } else {
             return view('includes.dashboard');
         }
-        
     }
-
-    
 }
