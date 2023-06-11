@@ -29,7 +29,7 @@
                     @if (Auth::user()->role->name=='Admin')
                     <td>
                         <p class="lead">
-                            <a class="btn btn-danger"href="/category/delete/{{$category->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button">Delete</a>
+                            <a class="btn btn-danger"href="/category/delete/{{$category->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button"><i class="fa fa-trash"></i></a>
                         </p>
                     </td>
                     @endif

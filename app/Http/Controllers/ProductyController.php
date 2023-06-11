@@ -12,8 +12,21 @@ class ProductyController extends Controller
 {
     public function index(){
         $produk= Produk::with('category')->get();
-        // dd($categories);
         return view('produk.index',compact(['produk']));
+    }
+
+    public function show($id)
+    {
+        $product = Produk::where('id', $id)->with('category')->first();
+
+        $related = Produk::where('category_id', $product->category->id)->inRandomOrder()->limit(4)->get();
+
+        if ($product) {
+            return view('produk.show', compact('product', 'related'));
+        } else {
+            abort(404);
+        }
+
     }
 
     public function produk(){

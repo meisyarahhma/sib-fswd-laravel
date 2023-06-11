@@ -72,11 +72,6 @@
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
-                
-                <!-- <div class="mb-3">
-                    <label for="foto">Unggah Foto</label> 
-                    <input class="form-control" id="foto" name="foto" type="file" >
-                </div> -->
                 </br>
                 <button type="submit" name="submit_btn"  class="btn btn-primary" >Upload</button>
             </form>

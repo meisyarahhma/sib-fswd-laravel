@@ -73,11 +73,6 @@
                     @enderror
                 </div>
                 
-                <!-- <div class="mb-3">
-                    <label for="foto">Unggah Foto</label> 
-                    <input class="form-control" id="foto" name="foto" type="file" value="{{$data->foto}}">
-                </div>
-                </br> -->
                 <button type="submit" name="submit_btn"  class="btn btn-primary my-3" >Update</button>
             </form>
         </div>

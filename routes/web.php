@@ -10,6 +10,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisController;
 use App\Http\Controllers\SlidersController;
+use App\Http\Controllers\LandingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,14 +31,14 @@ use App\Http\Controllers\SlidersController;
 // });
 
 
-Route::get('/', [DashboardController::class,'landing'])->name('landing');
+Route::get('/', [LandingController::class,'index'])->name('landing');
 
 
 //login
 Route::get('/login', [LoginController::class,'login'])->name('login');
 Route::post('/login/authenticate', [LoginController::class,'authenticate'])->name('login.authenticate');
 
-
+Route::get('/produkty/show/{id}', [ProductyController::class, 'show'])->name('produkty.show');
 
 //Registrasi
 Route::get('/registrasi', [RegisController::class,'regis'])->name('regis');

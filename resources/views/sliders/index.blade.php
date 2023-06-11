@@ -26,8 +26,8 @@
                         <td>{{$slider['name']}}</td>
                         <td>
                             <p class="lead">
-                                <a class="btn btn-warning" href="/sliders/update/{{$slider->id}}" role="button">Update</a>
-                                <a class="btn btn-danger"href="/sliders/delete/{{$slider->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button">Delete</a>
+                                <a class="btn btn-warning" href="/sliders/update/{{$slider->id}}" role="button"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-danger"href="/sliders/delete/{{$slider->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button"><i class="fa fa-trash"></i></a>
                             </p>
                         </td>
                     </tr>
