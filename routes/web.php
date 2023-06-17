@@ -38,6 +38,7 @@ Route::get('/', [LandingController::class,'index'])->name('landing');
 Route::get('/login', [LoginController::class,'login'])->name('login');
 Route::post('/login/authenticate', [LoginController::class,'authenticate'])->name('login.authenticate');
 
+//show produk di landing
 Route::get('/produkty/show/{id}', [ProductyController::class, 'show'])->name('produkty.show');
 
 //Registrasi
@@ -50,12 +51,15 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 
-    //produk
+    //produk user
     Route::get('/produk', [ProductyController::class,'produk'])->name('produk');
-  
+    
+    //detail produk saat login
+    Route::get('/product/detail/{id}', [ProductyController::class,'detail'])->name('product.detail');
     //Admin
     Route::middleware('role:Admin')->group(function(){
         Route::get('/sliders', [SlidersController::class,'index'])->name('sliders');
+        Route::get('/sliders/detail/{id}', [SlidersController::class,'detail'])->name('sliders.detail');
         Route::get('/sliders/create', [SlidersController::class,'create'])->name('sliders.create');
         Route::post('/sliders/store', [SlidersController::class,'store'])->name('sliders.store');
         Route::get('/sliders/update/{id}', [SlidersController::class,'update'])->name('sliders.update');
@@ -86,6 +90,7 @@ Route::middleware('auth')->group(function(){
         Route::get('/role/delete/{id}', [RoleController::class,'delete'])->name('role.delete');
     
         Route::get('/user', [UserController::class,'index'])->name('index');
+        Route::get('/user/detail/{id}', [UserController::class,'detail'])->name('detail');
         Route::get('/user/create', [UserController::class,'create']);
         Route::post('/user/store', [UserController::class,'store']); //proses upload
         Route::get('/user/update/{id}', [UserController::class,'update'])->name('update');

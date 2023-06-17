@@ -34,6 +34,7 @@
                         </td>
                         <td>
                             <p class="lead">
+                                <a class="btn btn-info" href="/user/detail/{{$u->id}}" role="button"><i class="fa fa-info"></i></a>
                                 <a class="btn btn-warning" href="/user/update/{{$u->id}}" role="button"><i class="fa fa-pencil"></i></a>
                                 <a class="btn btn-danger"href="/user/delete/{{$u->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button"><i class="fa fa-trash"></i></a>
                             </p>

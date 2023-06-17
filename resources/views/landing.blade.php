@@ -106,7 +106,7 @@
                             <div class="card h-100"> 
                                 <div class="col mb-5">
                                     <!-- Product image-->
-                                    <img class="card-img-top my-3" src="{{ asset('storage/produk/' . $produk->gambar) }}" width="200" height="200"alt="..." />
+                                    <img class="card-img-top" src="{{ asset('storage/produk/' . $produk->gambar) }}" width="200" height="200"alt="..." />
                                     <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">

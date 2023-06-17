@@ -13,6 +13,18 @@ class SlidersController extends Controller
         return view('sliders.index', compact('sliders'));
     }
 
+    public function detail($id)
+    {
+        $sliders=Slider::find($id);
+
+        if ($sliders) {
+            return view('sliders.detail', compact('sliders'));
+        } else {
+            abort(404);
+        }
+
+    }
+    
     public function create(){
         $sliders=Slider::All();
         return view('sliders.create', compact('sliders'));

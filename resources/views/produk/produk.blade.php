@@ -22,7 +22,7 @@
                                     </div>
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center "><a class="btn btn-outline-dark bg-success text-white mt-auto bi bi-whatsapp" href="https://wa.me/+6281326223552"> Pesan Sekarang</a></div>
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product/detail/{{$p->id}}">View Option</a></div>
                                     </div>
                                 </div>    
                             </div> 

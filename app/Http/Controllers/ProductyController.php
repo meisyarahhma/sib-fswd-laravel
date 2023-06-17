@@ -29,6 +29,20 @@ class ProductyController extends Controller
 
     }
 
+    public function detail($id)
+    {
+        $product = Produk::where('id', $id)->with('category')->first();
+
+        $related = Produk::where('category_id', $product->category->id)->inRandomOrder()->limit(4)->get();
+
+        if ($product) {
+            return view('produk.detail', compact('product', 'related'));
+        } else {
+            abort(404);
+        }
+
+    }
+
     public function produk(){
         $produk= Produk::All();
         return view('produk.produk',compact(['produk']));

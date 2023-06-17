@@ -16,6 +16,18 @@ class UserController extends Controller
         return view('users.index',compact('user'));
     }
 
+    public function detail($id)
+    {
+        $user = User::where('id', $id);
+
+        if ($user) {
+            return view('users.detail', compact('user'));
+        } else {
+            abort(404);
+        }
+
+    }
+
     public function create(){
         $user = User::All();
         $roles= role::All();
