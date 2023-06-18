@@ -76,8 +76,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/category/store', [CategoryController::class,'store'])->name('category.store');
         Route::get('/category/delete/{id}', [CategoryController::class,'delete'])->name('category.delete');
         
-        Route::get('/status', [ProductyController::class,'status'])->name('product.status'); //status produk
-        Route::put('/status/accepted/{id}', [ProductyController::class,'accepted'])->name('status.accepted');
+        
 
         Route::get('/product', [ProductyController::class,'index'])->name('product.index');
         Route::get('/product/create', [ProductyController::class,'create'])->name('product.create');
@@ -89,6 +88,9 @@ Route::middleware('auth')->group(function(){
 
     //Admin
     Route::middleware('role:Admin')->group(function(){
+        Route::get('/status', [ProductyController::class,'status'])->name('product.status'); //status produk
+        Route::put('/status/accepted/{id}', [ProductyController::class,'accepted'])->name('status.accepted');
+        
         Route::get('/role', [RoleController::class,'index'])->name('role');
         Route::get('/role/create', [RoleController::class,'create'])->name('role.create');
         Route::post('/role/store', [RoleController::class,'store'])->name('role.store');
