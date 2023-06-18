@@ -18,14 +18,14 @@ class LandingController extends Controller
         $sliders = Slider::all();
 
         if ($request->category) {
-            $products = Produk::with('category')->whereHas('category', function ($query) use ($request) {
+            $products = Produk::where('status','Accepted')->with('category')->whereHas('category', function ($query) use ($request) {
                 $query->where('name', $request->category);
             })->get();
         } else if ($request->min && $request->max) {
-            $products = Produk::where('price', '>=', $request->min)->where('price', '<=', $request->max)->get();
+            $products = Produk::where('status','Accepted')->where('price', '>=', $request->min)->where('price', '<=', $request->max)->get();
         } else {
             // mengambil 8 data produk secara acak
-            $products = Produk::inRandomOrder()->limit(8)->get();
+            $products = Produk::where('status','Accepted')->inRandomOrder()->limit(8)->get();
         }
 
         return view('landing', compact('products', 'categories', 'sliders'));

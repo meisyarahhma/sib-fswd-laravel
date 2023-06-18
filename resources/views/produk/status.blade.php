@@ -2,14 +2,11 @@
 
 @section('content')
         <div class="container-fluid px-4">
-            <div class="justify-content-space-between">
-                <a class="btn btn-primary my-3" href="{{route('product.create')}}" role="button">Tambah Produk</a>
-            </div> 
-            <div class="my-2">
-                <h2>Daftar Produk</h2>
+            <div class="my-4">
+                <h2>Daftar Persetujuan Produk</h2>
             </div>
             
-            <table class="table">
+            <table class="table mt-2">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -37,9 +34,8 @@
                     <td>{{$p['status']}}</td>
                     <td>
                         <p class="lead">
-                            <a class="btn btn-info" href="/product/detail/{{$p->id}}" role="button"><i class="fa fa-info"></i></a>
-                            <a class="btn btn-warning " href="/product/update/{{$p->id}}" role="button"><i class="fa fa-pencil"></i></a>
-                            <a class="btn btn-danger"href="/product/delete/{{$p->id}}" onclick="return confirm('Apakah anda yakin ingin menghapus?')" role="button"><i class="fa fa-trash"></i></a>
+                            <a class="btn btn-success" href="/status/accepted/{{$p->id}}" role="button"><i class="fa fa-check"></i></a>
+                            <a class="btn btn-danger"href="" onclick="return confirm('Apakah anda yakin ingin menolak?')" role="button"><i class="fa fa-close"></i></a>
                         </p>
                     </td>
                 </tr> 

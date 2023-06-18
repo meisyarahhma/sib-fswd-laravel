@@ -45,6 +45,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:3',
             'category_id' => 'required',
+            'status' => 'required',
             'price' => 'required|integer',
             //'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -67,6 +68,7 @@ class ProductController extends Controller
         $produk = Produk::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
+            'status' => $request->status,
             'price' => $request->price,
             //'gambar' => $imageName,
         ]);
@@ -84,6 +86,7 @@ class ProductController extends Controller
             'id' => 'required',
             'name' => 'required|string|min:3',
             'category_id' => 'required',
+            'status' => 'required',
             'price' => 'required|integer',
             //'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -102,6 +105,7 @@ class ProductController extends Controller
             $product = $product->update([
                 'name' => $request->name,
                 'category_id' => $request->category_id,
+                'status' => $request->status,
                 'price' => $request->price,
                 //'gambar' => $imageName,
             ]);

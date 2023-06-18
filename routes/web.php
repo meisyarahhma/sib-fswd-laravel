@@ -11,6 +11,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisController;
 use App\Http\Controllers\SlidersController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\StatusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +57,7 @@ Route::middleware('auth')->group(function(){
     
     //detail produk saat login
     Route::get('/product/detail/{id}', [ProductyController::class,'detail'])->name('product.detail');
+    
     //Admin
     Route::middleware('role:Admin')->group(function(){
         Route::get('/sliders', [SlidersController::class,'index'])->name('sliders');
@@ -74,6 +76,9 @@ Route::middleware('auth')->group(function(){
         Route::post('/category/store', [CategoryController::class,'store'])->name('category.store');
         Route::get('/category/delete/{id}', [CategoryController::class,'delete'])->name('category.delete');
         
+        Route::get('/status', [ProductyController::class,'status'])->name('product.status'); //status produk
+        Route::put('/status/accepted/{id}', [ProductyController::class,'accepted'])->name('status.accepted');
+
         Route::get('/product', [ProductyController::class,'index'])->name('product.index');
         Route::get('/product/create', [ProductyController::class,'create'])->name('product.create');
         Route::post('/product/store', [ProductyController::class,'store'])->name('product.store');

@@ -13,7 +13,8 @@ class Produk extends Model
         'category_id',
         'name',
         'price',
-        'gambar'
+        'gambar',
+        'status'
     ];
 
     public function category()

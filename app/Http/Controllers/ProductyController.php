@@ -7,6 +7,7 @@ use App\Models\Produk;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ProductyController extends Controller
 {
@@ -15,11 +16,24 @@ class ProductyController extends Controller
         return view('produk.index',compact(['produk']));
     }
 
+    public function status(){
+        $produk= Produk::with('category')->get();
+        return view('produk.status',compact(['produk']));
+    }
+
+    public function accepted(Request $request, $id){
+        Produk::where('id', $id)->update([
+            'status' => 'Accepted',
+        ]);
+
+        return redirect()->route('product.status');
+    }
+
     public function show($id)
     {
-        $product = Produk::where('id', $id)->with('category')->first();
+        $product = Produk::where('status','Accepted')->where('id', $id)->with('category')->first();
 
-        $related = Produk::where('category_id', $product->category->id)->inRandomOrder()->limit(4)->get();
+        $related = Produk::where('status','Accepted')->where('category_id', $product->category->id)->inRandomOrder()->limit(4)->get();
 
         if ($product) {
             return view('produk.show', compact('product', 'related'));
@@ -44,14 +58,13 @@ class ProductyController extends Controller
     }
 
     public function produk(){
-        $produk= Produk::All();
+        $produk= Produk::where('status','Accepted')->get();
         return view('produk.produk',compact(['produk']));
     }
 
     public function create(){
-        $produk= Produk::All();
         $categories= Category::All();
-        return view('produk.create', compact('produk','categories')) ;
+        return view('produk.create', compact('categories')) ;
     }
 
     public function store(Request $request){
@@ -67,19 +80,29 @@ class ProductyController extends Controller
         }
 
         // ubah nama file gambar dengan angka random
-        $imageName = time().'.'.$request->gambar->extension(); // 1685433155.jpg
+        $imageName = time().'.'.$request->gambar->extension(); // 123456778.jpg
 
-        // upload file gambar ke folder slider
+        // upload file gambar ke folder 
         Storage::putFileAs('public/produk', $request->file('gambar'), $imageName);
 
-        // insert data ke table sliders
-        $produk = Produk::create([
-            'name' => $request->name,
-            'category_id' => $request->category_id,
-            'price' => $request->price,
-            'gambar' => $imageName,
-        ]);
-
+        // insert data ke table 
+        if (Auth::user()->role->name == 'Admin') {
+            Produk::create([
+                'name' => $request->name,
+                'category_id' => $request->category_id,
+                'status' => 'Accepted',
+                'price' => $request->price,
+                'gambar' => $imageName,
+            ]);
+        } else {
+            $produk = Produk::create([
+                'name' => $request->name,
+                'category_id' => $request->category_id,
+                'status' => 'Waiting',
+                'price' => $request->price,
+                'gambar' => $imageName,
+            ]);
+        }
         return redirect()->route('product.index');
     }
 
@@ -95,7 +118,6 @@ class ProductyController extends Controller
             'name' => 'required|string|min:3',
             'category_id' => 'required',
             'price' => 'required|integer',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -107,17 +129,17 @@ class ProductyController extends Controller
             // ambil nama file gambar lama dari database
             $old_image = Produk::find($id)->gambar;
 
-            // hapus file gambar lama dari folder slider
+            // hapus file gambar lama dari folder 
             Storage::delete('public/produk/'.$old_image);
 
             // FILE BARU //
             // ubah nama file gambar baru dengan angka random
             $imageName = time().'.'.$request->gambar->extension();
 
-            // upload file gambar ke folder slider
+            // upload file gambar ke folder 
             Storage::putFileAs('public/produk', $request->file('gambar'), $imageName);
 
-            // update data sliders
+            // update data
             Produk::where('id', $id)->update([
                 'name' => $request->name,
                 'category_id' => $request ->category_id,
