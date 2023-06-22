@@ -28,7 +28,7 @@
                     <td>{{$loop->iteration}}</td>
                     <td><img src="{{ asset('storage/produk/' . $p->gambar) }}" class="img-fluid" style="max-width: 100px;"alt="{{ $p->gambar }}"></td>
                     <td>{{$p['name']}}</td>
-                    <td>Rp{{$p['price']}}</td>
+                    <td>Rp{{ number_format($p->price, 0) }}</td>
                     <td>
                         <span class="badge {{ $p->category ? ($p->category->name == 'Admin' ? 'bg-success' : 'bg-primary') : 'bg-primary' }}">
                             {{ $p->category ? $p->category->name : 'Tidak Tersedia' }}

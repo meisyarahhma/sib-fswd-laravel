@@ -17,7 +17,7 @@
                                             <!-- Product name-->
                                             <h5 class="fw-bolder">{{$p['name']}}</h5>
                                             <!-- Product price-->
-                                            Rp{{$p['price']}}
+                                            Rp{{ number_format($p->price, 0) }}
                                         </div>
                                     </div>
                                     <!-- Product actions-->

@@ -15,10 +15,10 @@
           </div>
           <div class="card-body p-4 p-sm-5">
             <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
-            <form action="{{ route('regis.store') }}" method="POST">
+            <form action="/registrasi/store" method="POST">
               @csrf
               <div class="form-floating mb-3">
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="floatingInputUsername" placeholder="name" value="{{ old('name') }}" name="name" required autofocus>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="floatingInputUsername" placeholder="name" value="{{ old('name') }}" name="name">
                 <label for="floatingInputUsername">Name</label>
                 @error('name')
                   <small class="text-danger">{{ $message }}</small>
@@ -58,7 +58,7 @@
               </div>
 
               <div class="d-grid mb-2">
-                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</button>
+                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" name="submit_btn" type="submit">Register</button>
               </div>
 
               <a class="d-block text-center mt-2 small" href="/login">Have an account? Log In</a>
