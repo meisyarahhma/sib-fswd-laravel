@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function detail($id)
     {
-        $user = User::where('id', $id);
+        $user = User::find($id);
 
         if ($user) {
             return view('users.detail', compact('user'));
