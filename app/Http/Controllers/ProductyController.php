@@ -17,13 +17,23 @@ class ProductyController extends Controller
     }
 
     public function status(){
-        $produk= Produk::with('category')->get();
+        $produk= Produk::where('status','Waiting')->with('category')->get();
         return view('produk.status',compact(['produk']));
     }
 
-    public function accepted(Request $request, $id){
+    public function aksi($id){
+        $product = Produk::where('id', $id)->with('category')->first();
+
+        if ($product) {
+            return view('produk.aksi', compact('product'));
+        } else {
+            abort(404);
+        }
+    }
+
+    public function validasi(Request $request, $id){
         Produk::where('id', $id)->update([
-            'status' => 'Accepted',
+            'status' => $request->status,
         ]);
 
         return redirect()->route('product.status');

@@ -27,7 +27,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     @if (Auth::user()->role->name=='Admin')
-                                    <a class="nav-link" href="{{route('product.status')}}">Status Produk</a>
+                                    <a class="nav-link" href="{{route('product.status')}}">Persetujuan Produk</a>
                                     @endif
                                     <a class="nav-link" href="/category">Kategori</a>
                                     <a class="nav-link" href="{{route('product.index')}}">Daftar Produk</a>

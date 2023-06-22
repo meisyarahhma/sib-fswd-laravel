@@ -89,7 +89,8 @@ Route::middleware('auth')->group(function(){
     //Admin
     Route::middleware('role:Admin')->group(function(){
         Route::get('/status', [ProductyController::class,'status'])->name('product.status'); //status produk
-        Route::put('/status/accepted/{id}', [ProductyController::class,'accepted'])->name('status.accepted');
+        Route::get('/status/aksi/{id}', [ProductyController::class,'aksi'])->name('status.aksi'); 
+        Route::put('/status/validasi/{id}', [ProductyController::class,'validasi'])->name('status.validasi');
         
         Route::get('/role', [RoleController::class,'index'])->name('role');
         Route::get('/role/create', [RoleController::class,'create'])->name('role.create');
