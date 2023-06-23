@@ -30,7 +30,7 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">About</a></li>
                         
                         <form class="d-flex text-right justify-content-space-between">
                                 @auth

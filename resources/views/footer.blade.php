@@ -1,5 +1,5 @@
 <!-- Footer-->
-    <footer class="py-5 bg-dark">
+    <footer class="py-5 bg-dark" id="footer">
             <section class="d-flex justify-content-center text-white">
                 <!-- Left -->
                 <div class="me-5 d-none d-lg-block">
