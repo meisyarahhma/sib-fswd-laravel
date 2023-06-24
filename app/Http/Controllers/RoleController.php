@@ -19,10 +19,25 @@ class RoleController extends Controller
 
     public function store(Request $request){
         
-        $role =role::create([
+        $role =Role::create([
             'name' => $request -> name
         ]);
 
+        return redirect()->route('role');
+    }
+
+    public function update($id){
+        $role = Role::find($id);
+        // dd($data);
+        return view('roles.update', compact('role'));
+    }
+
+    public function prosesupdate(Request $request, $id){
+        $role = Role::find($id);
+        $role -> update([
+            'name' => $request -> name,
+        ]);
+        // dd($data);
         return redirect()->route('role');
     }
 

@@ -26,6 +26,21 @@ class CategoryController extends Controller
         return redirect()->route('category.index');
     }
 
+    public function update($id){
+        $category = Category::find($id);
+        // dd($data);
+        return view('kategori.update', compact('category'));
+    }
+
+    public function prosesupdate(Request $request, $id){
+        $category = Category::find($id);
+        $category -> update([
+            'name' => $request -> name,
+        ]);
+        // dd($data);
+        return redirect()->route('category.index');
+    }
+
     public function delete($id){
         $categories =Category::find($id);
         $categories -> delete();

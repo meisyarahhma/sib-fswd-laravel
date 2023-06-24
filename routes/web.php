@@ -74,6 +74,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/category', [CategoryController::class,'index'])->name('category.index');
         Route::get('/category/create', [CategoryController::class,'create'])->name('category.create');
         Route::post('/category/store', [CategoryController::class,'store'])->name('category.store');
+        Route::get('/category/update/{id}', [CategoryController::class,'update'])->name('category.update');
+        Route::put('/category/prosesupdate/{id}', [CategoryController::class,'prosesupdate'])->name('category.prosesupdate');
         Route::get('/category/delete/{id}', [CategoryController::class,'delete'])->name('category.delete');
         
         
@@ -95,6 +97,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/role', [RoleController::class,'index'])->name('role');
         Route::get('/role/create', [RoleController::class,'create'])->name('role.create');
         Route::post('/role/store', [RoleController::class,'store'])->name('role.store');
+        Route::get('/role/update/{id}', [RoleController::class,'update'])->name('role.update');
+        Route::put('/role/prosesupdate/{id}', [RoleController::class,'prosesupdate'])->name('role.prosesupdate');
         Route::get('/role/delete/{id}', [RoleController::class,'delete'])->name('role.delete');
     
         Route::get('/user', [UserController::class,'index'])->name('index');
